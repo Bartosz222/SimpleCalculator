@@ -157,11 +157,25 @@ namespace Project2 {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
 		const double vat = 23;
+		const double podatek = 17;
 		int liczba = System::Convert::ToInt16(textBox1->Text);
 		int wynik;
-		if (checkBox1->Checked) {
+		if (checkBox1->Checked && checkBox2->Checked) {
 			wynik = vat / 100 * liczba;
 			wynik += liczba;
+			liczba = wynik;
+			wynik = podatek / 100 * liczba;
+			wynik = liczba - wynik;
+			label1->Text = System::Convert::ToString(wynik);
+		}
+		else if (checkBox1->Checked) {
+			wynik = vat / 100 * liczba;
+			wynik += liczba;
+			label1->Text = System::Convert::ToString(wynik);
+		}
+		else if (checkBox2->Checked) {
+			wynik = podatek / 100 * liczba;
+			wynik = liczba - wynik;
 			label1->Text = System::Convert::ToString(wynik);
 		}
 		else label1->Text = System::Convert::ToString(liczba);
