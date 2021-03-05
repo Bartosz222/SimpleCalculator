@@ -39,6 +39,8 @@ namespace Project2 {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ labelForTextbox;
 	private: System::Windows::Forms::Label^ labelForLabel1;
+	private: System::Windows::Forms::CheckBox^ checkBox1;
+	private: System::Windows::Forms::CheckBox^ checkBox2;
 	protected:
 
 	private:
@@ -59,6 +61,8 @@ namespace Project2 {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->labelForTextbox = (gcnew System::Windows::Forms::Label());
 			this->labelForLabel1 = (gcnew System::Windows::Forms::Label());
+			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
+			this->checkBox2 = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -110,11 +114,35 @@ namespace Project2 {
 			this->labelForLabel1->TabIndex = 4;
 			this->labelForLabel1->Text = L"Wynik:";
 			// 
+			// checkBox1
+			// 
+			this->checkBox1->AutoSize = true;
+			this->checkBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18.25F));
+			this->checkBox1->Location = System::Drawing::Point(314, 83);
+			this->checkBox1->Name = L"checkBox1";
+			this->checkBox1->Size = System::Drawing::Size(70, 33);
+			this->checkBox1->TabIndex = 5;
+			this->checkBox1->Text = L"Vat";
+			this->checkBox1->UseVisualStyleBackColor = true;
+			// 
+			// checkBox2
+			// 
+			this->checkBox2->AutoSize = true;
+			this->checkBox2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 18.25F));
+			this->checkBox2->Location = System::Drawing::Point(314, 136);
+			this->checkBox2->Name = L"checkBox2";
+			this->checkBox2->Size = System::Drawing::Size(125, 33);
+			this->checkBox2->TabIndex = 6;
+			this->checkBox2->Text = L"Podatek";
+			this->checkBox2->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(739, 435);
+			this->Controls->Add(this->checkBox2);
+			this->Controls->Add(this->checkBox1);
 			this->Controls->Add(this->labelForLabel1);
 			this->Controls->Add(this->labelForTextbox);
 			this->Controls->Add(this->label1);
@@ -128,7 +156,15 @@ namespace Project2 {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
-		label1->Text = textBox1->Text;
+		const double vat = 23;
+		int liczba = System::Convert::ToInt16(textBox1->Text);
+		int wynik;
+		if (checkBox1->Checked) {
+			wynik = vat / 100 * liczba;
+			wynik += liczba;
+			label1->Text = System::Convert::ToString(wynik);
+		}
+		else label1->Text = System::Convert::ToString(liczba);
 	}
 	};
 }
